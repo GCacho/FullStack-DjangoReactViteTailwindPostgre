@@ -64,10 +64,7 @@ pip install psycopg2
 ```
 - Verify dependencies Versions
 ```
-pip show django
-pip show djangorestframework
-pip show django-cors-headers
-pip show psycopg2
+pip freeze
 ```
 - Verify correct Installation of all dependencies
 ```
