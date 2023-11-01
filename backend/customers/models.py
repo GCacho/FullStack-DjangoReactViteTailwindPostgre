@@ -1,6 +1,7 @@
 from django.db import models
 from books.models import Book
 from django.utils.text import slugify
+from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 
@@ -8,10 +9,15 @@ class Customer(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     username = models.CharField(max_length=100, blank=True, unique=True)
+    email = models.EmailField(max_length=254, unique=True, null=True)
+    phone = PhoneNumberField(null=True, blank=False, unique=True)
+    customer_picture = models.ImageField(upload_to='customer', blank=True, null=True)
     additional_info = models.TextField(blank=True)
     rating = models.PositiveSmallIntegerField(default=50)
     books = models.ManyToManyField(Book, blank=True, help_text='books that are currently rented')
     book_count = models.PositiveSmallIntegerField(default=0)
+    registered = models.DateTimeField(auto_now_add=True, null=True)
+    updated = models.DateTimeField(auto_now=True, null=True)
 
     def __str__(self):
         return str(self.username)
