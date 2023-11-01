@@ -19,7 +19,7 @@ class BookTitle(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Book position: {self.title}"
+        return str(self.title)
     
     def save(self, *args, **kwargs):
         if not self.slug:

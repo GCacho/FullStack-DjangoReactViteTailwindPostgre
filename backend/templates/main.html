@@ -4,8 +4,17 @@
 
 {% block content %}
 <h1>
-    xxx
-    <br>
-    {{ hello_key }}
+    {{ book.title }}
 </h1>
+
+{% if qs %}
+    <ul>   
+    {% for obj in qs  %}
+        <li>{{ obj.first_name }} {{ obj.last_name }} ({{obj.username}})</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    No customers in the DB
+{% endif %}
+
 {% endblock content %}
