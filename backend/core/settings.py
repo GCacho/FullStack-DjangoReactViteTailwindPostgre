@@ -38,10 +38,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'rest_framework',
-    'corsheaders',
+    # Our Apps
 
     'posts',
+    'authors',
+    'books',
+    'customers',
+    'publishers',
+    'rentals',
+
+    # Thirth Party Apps
+    'rest_framework',
+    'corsheaders',
+    'django_countries',
 ]
 
 CORS_ALLOWED_ORIGINS = ['http://localhost:5173']
@@ -93,7 +102,6 @@ DATABASES = {
         'PORT': '5432',       # Default port of PostgreSQL.
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
