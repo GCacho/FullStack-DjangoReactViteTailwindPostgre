@@ -19,7 +19,7 @@ class BookTitle(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return str(self.title)
+        return f"Book Position: {self.title}"
     
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -27,7 +27,7 @@ class BookTitle(models.Model):
         super().save(*args,**kwargs)
 
 class Book(models.Model):
-    title = models.ForeignKey(BookTitle, on_delete=models.CASCADE)
+    title = models.ForeignKey(BookTitle, on_delete=models.CASCADE, related_name="books") # related_name so we can use it on core/views.py ( books = obj.books.all() )
     isbn = models.CharField(max_length=24, blank=True)
 
     # qr_code
