@@ -11,7 +11,7 @@ class PublisherResource(resources.ModelResource):
     date = Field()
     class Meta:
         model = Publisher
-        fields = ('id', 'name', 'country', 'created', 'date')
+        fields = ('id', 'name', 'country', 'date')
         export_order = ( 'id', 'name', 'country', 'date')
     
     def dehydrate_date(self, obj):
