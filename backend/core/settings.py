@@ -52,6 +52,15 @@ INSTALLED_APPS = [
     'django_countries',
     'phonenumber_field',
     'import_export',
+    'tailwind',
+    'theme',
+    'django_browser_reload',
+]
+
+TAILWIND_APP_NAME = 'theme'
+
+INTERNAL_IPS = [
+    "127.0.0.1",
 ]
 
 CORS_ALLOWED_ORIGINS = ['http://localhost:5173']
@@ -61,6 +70,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
 
     'corsheaders.middleware.CorsMiddleware',
+    'django_browser_reload.middleware.BrowserReloadMiddleware',
 
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

@@ -26,6 +26,7 @@ urlpatterns = [
     path('api/', include('core.api.urls')),
     path('books/', include('books.urls', namespace='books')), # Same as app_name on books/urls.py
     path('', home_view),
+    path("__reload__/", include("django_browser_reload.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
