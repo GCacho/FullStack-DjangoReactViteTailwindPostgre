@@ -3,12 +3,14 @@ from django.db import models
 from publishers.models import Publisher
 from authors.models import Author
 from django.utils.text import slugify
+from django.urls import reverse
+from rentals.rental_choices import STATUS_CHOICES
 # Imports for QrCode Generation -> Documentation https://pypi.org/project/qrcode/
 import qrcode
 from io import BytesIO
 from django.core.files import File
 from PIL import Image
-from django.urls import reverse
+
 
 # Create your models here.
 class BookTitle(models.Model):
@@ -49,6 +51,15 @@ class Book(models.Model):
 
     def __str__(self):
         return str(self.title)
+    
+    # Exporting Book Data
+    @property
+    def status(self):
+        if len(self.rental_set.all()) > 0:
+            statuses = dict(STATUS_CHOICES)
+            return statuses[self.rental_set.first().status]
+        return False
+    
     
     # Create de Book ID
     def save(self, *args, **kwargs):
