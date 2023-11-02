@@ -8,6 +8,7 @@ import qrcode
 from io import BytesIO
 from django.core.files import File
 from PIL import Image
+from django.urls import reverse
 
 # Create your models here.
 class BookTitle(models.Model):
@@ -21,7 +22,12 @@ class BookTitle(models.Model):
     # Defining methods in models with decorators
     @property
     def books(self):
-        return self.my_books.all() # comes from line 34
+        return self.my_books.all() # comes from class Book on the title
+    
+    # Create the absolute url for correct navigation
+    def get_absolute_url(self):
+        return reverse("books:detail", kwargs={"pk": self.pk})
+    
 
     def __str__(self):
         return f"Book Position: {self.title}"

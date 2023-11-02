@@ -7,7 +7,7 @@
     {% if qs %}
         <ul>
             {% for el in qs %}
-                <li><a href="{% url "books:detail" el.pk %}">{{ el.title }}</a></li>
+                <li><a href="{{el.get_absolute_url}}">{{ el.title }}</a></li> {% comment "" %}el.get_absolute_url comes from books/models {% endcomment %}
             {% endfor %}
         </ul>
     {% endif %}
