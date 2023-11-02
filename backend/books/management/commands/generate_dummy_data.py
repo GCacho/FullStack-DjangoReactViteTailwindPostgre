@@ -48,7 +48,7 @@ class Command(BaseCommand):
         customers_list = [
             {'first_name':'Juan', 'last_name':'Perezoso'},
             {'first_name':'Marco', 'last_name':'Polo'},
-            {'first_name':'Benito', 'last_name':'Camelo'},
+            {'first_name':'Benito', 'last_name':'Islas'},
         ]
         for item in customers_list:
             Customer.objects.create(**item)
