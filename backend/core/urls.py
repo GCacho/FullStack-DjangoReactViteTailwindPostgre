@@ -23,8 +23,9 @@ from .views import home_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_view),
     path('api/', include('core.api.urls')),
+    path('books/', include('books.urls', namespace='books')), # Same as app_name on books/urls.py
+    path('', home_view),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
