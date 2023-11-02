@@ -8,7 +8,7 @@ def home_view(request):
     qs = Customer.objects.all()
     # obj = Book.objects.get(id=1)
     obj = BookTitle.objects.get(id=1) # get all objects on books (check model on the book class)
-    books = obj.books.all() # To check books with the same title
+    books = obj.books # To check books with the same title
     print(books)
 
     context = {

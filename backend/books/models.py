@@ -18,6 +18,11 @@ class BookTitle(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    # Defining methods in models with decorators
+    @property
+    def books(self):
+        return self.my_books.all()
+
     def __str__(self):
         return f"Book Position: {self.title}"
     
@@ -27,7 +32,7 @@ class BookTitle(models.Model):
         super().save(*args,**kwargs)
 
 class Book(models.Model):
-    title = models.ForeignKey(BookTitle, on_delete=models.CASCADE, related_name="books") # Reverse Relationship: related_name so we can use it on core/views.py ( books = obj.books.all() )
+    title = models.ForeignKey(BookTitle, on_delete=models.CASCADE, related_name="my_books") # Reverse Relationship: related_name so we can use it on core/views.py ( books = obj.books.all() )
     isbn = models.CharField(max_length=24, blank=True)
 
     # qr_code
