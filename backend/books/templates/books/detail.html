@@ -5,6 +5,7 @@
 {% block content %}
 
 <h1>Title: {{obj.title}}</h1>
-
+<br>
+<a href="{% url "books:main" %}" class="btn btn-danger">Go Back</a>
 
 {% endblock content %}
