@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Our Apps
-
     'posts',
     'authors',
     'books',
@@ -52,6 +51,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_countries',
     'phonenumber_field',
+    'import_export',
 ]
 
 CORS_ALLOWED_ORIGINS = ['http://localhost:5173']
