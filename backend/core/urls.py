@@ -19,13 +19,14 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from .views import home_view
+from .views import home_view, change_theme
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', home_view),
+    path('switch/', change_theme, name='change'),
     path('api/', include('core.api.urls')),
     path('books/', include('books.urls', namespace='books')), # Same as app_name on books/urls.py
-    path('', home_view),
     path("__reload__/", include("django_browser_reload.urls")),
 ]
 
