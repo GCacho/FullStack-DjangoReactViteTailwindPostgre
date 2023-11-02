@@ -27,7 +27,7 @@ class BookTitle(models.Model):
         super().save(*args,**kwargs)
 
 class Book(models.Model):
-    title = models.ForeignKey(BookTitle, on_delete=models.CASCADE, related_name="books") # related_name so we can use it on core/views.py ( books = obj.books.all() )
+    title = models.ForeignKey(BookTitle, on_delete=models.CASCADE, related_name="books") # Reverse Relationship: related_name so we can use it on core/views.py ( books = obj.books.all() )
     isbn = models.CharField(max_length=24, blank=True)
 
     # qr_code
