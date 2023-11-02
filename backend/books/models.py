@@ -21,7 +21,7 @@ class BookTitle(models.Model):
     # Defining methods in models with decorators
     @property
     def books(self):
-        return self.my_books.all()
+        return self.my_books.all() # comes from line 34
 
     def __str__(self):
         return f"Book Position: {self.title}"
