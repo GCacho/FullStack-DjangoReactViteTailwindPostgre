@@ -42,7 +42,11 @@ module.exports = {
         // '../../**/*.py'
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                'my-green-color': '#3b8132',
+            }
+        },
     },
     plugins: [
         /**
