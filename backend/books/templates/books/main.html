@@ -3,7 +3,15 @@
 {% block title %}book title list{% endblock title %}
 
 {% block content %}
-<h1 class="text-white text-5xl font-bold p-4 rounded-lg">Book Title List: </h1>
+
+    <h1 class="text-slate-800 dark:text-gray-50 text-5xl font-bold p-4 rounded-lg">Book Title List: </h1>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="p-3 bg-blue-500 text-white rounded-md pl-4 pr-4">Send</button>
+    </form>
+
     {% if qs %}
         <ul>
             {% for elmnt in qs %}
