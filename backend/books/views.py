@@ -13,7 +13,7 @@ class BookTitleListView(FormView, ListView):
     context_object_name = 'qs'
     form_class = BookTitleForm
 
-    def get_queryset(self): # A QuerySet
+    def get_queryset(self): # A QuerySet find all books that starts with an 'L'
         parameter = 'L'
         return BookTitle.objects.filter(title__startswith=parameter)
     
@@ -23,6 +23,10 @@ class BookTitleListView(FormView, ListView):
     def form_valid(self, form): # To save the form data into the DB
         form.save()
         return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        self.object_list = self.get_queryset()
+        return super().form_invalid(form)
     
 
 # -------------------------------------------------------------------------------------------------
