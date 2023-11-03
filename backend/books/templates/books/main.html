@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
 
 {% block title %}book title list{% endblock title %}
 
@@ -8,7 +9,8 @@
 
     <form action="" method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{form.title|add_class:'bg-gray300 text-blue-700 p-3 rounded-lg font-bold'}}
+        
         <button type="submit" class="p-3 bg-blue-500 text-white rounded-md pl-4 pr-4">Send</button>
     </form>
 
