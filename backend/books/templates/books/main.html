@@ -5,22 +5,50 @@
 
 {% block content %}
 
-    <h1 class="text-slate-800 dark:text-gray-50 text-5xl font-bold p-4 rounded-lg">Book Title List: </h1>
+    <h1 class="flex justify-center items-center mt-4 text-slate-800 dark:text-gray-50 text-5xl font-bold p-4 rounded-lg">Add a New Book</h1>
 
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{form.title|add_class:'bg-gray300 text-blue-700 p-3 rounded-lg font-bold'}}
-        
-        <button type="submit" class="p-3 bg-blue-500 text-white rounded-md pl-4 pr-4">Send</button>
-    </form>
+    <div class="flex justify-center items-center mt-4">
+        <form action="" method="POST" class="w-3/5">
+            {% csrf_token %}
+            
+            <div class="mb-2 pt-2 pb-2">
+                <label for="{{ form.title.id_for_label }}" class="block font-bold text-slate-800 dark:text-slate-300">Title:</label>
+                {{ form.title|add_class:'bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-white rounded p-2 w-full' }}
+            </div>
+            <div class="mb-2 pt-2 pb-2">
+                <label for="{{ form.author.id_for_label }}" class="block font-bold text-slate-800 dark:text-slate-300">Author:</label>
+                {{ form.author|add_class:'bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-white rounded p-2 w-full' }}
+            </div>
+            <div class="mb-2 pt-4 pb-4">
+                <label for="{{ form.publisher.id_for_label }}" class="block font-bold text-slate-800 dark:text-slate-300">Publisher:</label>
+                {{ form.publisher|add_class:'bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-white rounded p-2 w-full' }}
+            </div>
+            
+            <div class="flex justify-end">
+                <button type="submit" class="w-1/6 p-3 bg-blue-500 text-white rounded-lg mt-4">Send</button>
+                <button type="reset" class="w-1/6 p-3 bg-red-500 text-white rounded-lg mt-4 ml-6">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <h1 class="flex justify-center items-center mt-4 text-slate-800 dark:text-gray-50 text-5xl font-bold p-4 rounded-lg">Book Title List:</h1>
 
     {% if qs %}
-        <ul>
+    <div class="flex justify-center mt-4">
+        <ul class="list-none">
             {% for elmnt in qs %}
-                <li><a href="{{elmnt.get_absolute_url}}">{{ elmnt.title }}</a></li> {% comment "" %}el.get_absolute_url comes from books/models {% endcomment %}
+                <li class="mb-2">
+                    <span class="text-lg text-slate-800 dark:text-gray-50 mr-2">{{ forloop.counter }}.</span>
+                    <a href="{{ elmnt.get_absolute_url }}" class="text-lg text-slate-800 dark:text-gray-50 hover:text-blue-500">
+                        {{ elmnt.title }}
+                    </a>
+                </li> 
             {% endfor %}
         </ul>
-    {% endif %}
+    </div>
+{% endif %}
+
+    {% comment "" %}el.get_absolute_url comes from books/models {% endcomment %}
 
     {% endblock content %}
 
