@@ -3,11 +3,11 @@
 {% block title %}book title list{% endblock title %}
 
 {% block content %}
-<h1>Book Title List: </h1>
+<h1 class="text-white text-5xl font-bold p-4 rounded-lg">Book Title List: </h1>
     {% if qs %}
         <ul>
-            {% for el in qs %}
-                <li><a href="{{el.get_absolute_url}}">{{ el.title }}</a></li> {% comment "" %}el.get_absolute_url comes from books/models {% endcomment %}
+            {% for elmnt in qs %}
+                <li><a href="{{elmnt.get_absolute_url}}">{{ elmnt.title }}</a></li> {% comment "" %}el.get_absolute_url comes from books/models {% endcomment %}
             {% endfor %}
         </ul>
     {% endif %}

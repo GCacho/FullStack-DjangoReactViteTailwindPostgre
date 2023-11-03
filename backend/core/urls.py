@@ -23,7 +23,7 @@ from .views import home_view, change_theme
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_view),
+    path('', home_view, name="home"),
     path('switch/', change_theme, name='change'),
     path('api/', include('core.api.urls')),
     path('books/', include('books.urls', namespace='books')), # Same as app_name on books/urls.py
