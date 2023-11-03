@@ -4,11 +4,20 @@ from django.views.generic import ListView
 # Create your views here.
 
 class BookTitleListView(ListView):
-    model = BookTitle
+    # model = BookTitle
+    # queryset = BookTitle.objects.all()[:3] # Just send the first 3 objects
+    # queryset = BookTitle.objects.all().order_by('-created') # Reverse order
     template_name = 'books/main.html'
     context_object_name = 'qs'
 
-# def book_title_list_view(request): # Same than _> class BookTitleListView(ListView):
+    def get_queryset(self):
+        parameter = 'S'
+        return BookTitle.objects.filter(title__startswith=parameter)
+    
+
+# -------------------------------------------------------------------------------------------------
+
+# def book_title_list_view(request): # Same as -> class BookTitleListView(ListView): on the top of this file.
 #     qs = BookTitle.objects.all()
 #     return render(request,'books/main.html', {'qs':qs})
 
