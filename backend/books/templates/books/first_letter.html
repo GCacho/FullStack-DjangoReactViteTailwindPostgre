@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %} | Books starting with {{ letter|capfirst }} {% endblock title %}
+
+{% block content %}
+
+<h2>Books Starting with '{{ letter|capfirst }}'</h2>
+<ul>
+    {% for book in books %}
+        <a href="{{ book.get_absolute_url }}" class="text-lg text-slate-800 dark:text-gray-50 hover:text-blue-500">
+            {{ book.title }}
+        </a>
+        <!-- Otras propiedades del libro que quieras mostrar -->
+    {% empty %}
+        <li>No books found starting with this letter.</li>
+    {% endfor %}
+</ul>
+<br>
+<a href="{% url "books:main" %}" class="btn btn-danger">Go Back</a>
+{% endblock content %}

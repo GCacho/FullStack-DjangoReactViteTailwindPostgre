@@ -4,6 +4,7 @@ from django.views.generic import ListView, FormView
 from .forms import BookTitleForm
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
+import string
 # Create your views here.
 
 class BookTitleListView(FormView, ListView):
@@ -15,10 +16,6 @@ class BookTitleListView(FormView, ListView):
     form_class = BookTitleForm
     i_instance = None
 
-    # def get_queryset(self): # A QuerySet find all books that starts with an 'L'
-    #     parameter = 'L'
-    #     return BookTitle.objects.filter(title__startswith=parameter)
-    
     def get_success_url(self): # To send the form to the DB with the correct URL
         return self.request.path
     
@@ -33,14 +30,9 @@ class BookTitleListView(FormView, ListView):
         return super().form_invalid(form)
     
     def get_context_data(self, **kwargs):
-        # context = { # with just get_context_data(self):
-        #     'hi':'Hello World',
-        #     'form':self.form_class,
-        #     'qs':self.get_queryset(),
-        # }
         context = super().get_context_data(**kwargs)
-        context['hi'] = "Hello World"
-        context['hi2'] = "Hello World 2"
+        letters = list(string.ascii_uppercase)
+        context['letters'] = letters
         return context
     
 
@@ -54,3 +46,7 @@ class BookTitleListView(FormView, ListView):
 def book_title_detail_view(request, pk):
     obj = BookTitle.objects.get(pk=pk)
     return render(request, 'books/detail.html', {'obj':obj})
+
+def book_first_letter_view(request, letter):
+    books = BookTitle.objects.filter(title__istartswith=letter)
+    return render(request, 'books/first_letter.html', {'books': books, 'letter': letter})

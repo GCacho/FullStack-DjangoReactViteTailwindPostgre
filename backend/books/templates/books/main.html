@@ -14,7 +14,9 @@
    
     {% include "components/header.html" with title="Book Titles" description="List of all the book titles available" %}
 
-    {{ hi }} {{hi2}}
+    {% for letter in letters %}
+        <a href="{% url 'books:book-first-letter' letter=letter|capfirst %}"> {{ letter }} </a>
+    {% endfor %}
 
     <form action="" method="POST">
         {% csrf_token %}
@@ -53,7 +55,7 @@
                 <li class="mb-2">
                     <span class="text-lg text-slate-800 dark:text-gray-50 mr-2">{{ forloop.counter }}.</span>
                     <a href="{{ elmnt.get_absolute_url }}" class="text-lg text-slate-800 dark:text-gray-50 hover:text-blue-500">
-                        {{ elmnt.title }}
+                        {{ elmnt.title|capfirst }}
                     </a>
                 </li> 
             {% endfor %}
