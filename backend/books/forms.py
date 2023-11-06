@@ -13,7 +13,9 @@ class BookTitleForm(forms.ModelForm):
         if len(title) < 3:
             error_msg = 'The title is too short my fren'
             self.add_error('title', error_msg)
+            # raise ValidationError(error_msg)
         
+
         book_title_exists = BookTitle.objects.filter(title__iexact=title).exists()
 
         if book_title_exists:

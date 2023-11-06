@@ -5,26 +5,42 @@
 
 {% block content %}
 
-    <h1 class="flex justify-center items-center mt-4 text-slate-800 dark:text-gray-50 text-5xl font-bold p-4 rounded-lg">Add a New Book</h1>
+    {% comment %} {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <div class="font-bold text-xl text-red-500">{{ error }}</div>
+        {% endfor %}
+    {% endif %} {% endcomment %}
 
-    <div class="flex flex-col justify-center items-center mt-4">
-        <form action="" method="POST" class="w-3/5">
-            {% csrf_token %}
+   
+    {% include "components/header.html" with title="Book Titles" description="List of all the book titles available" %}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        
+        <div class="mb-2 pt-2 pb-2">
             
-            <div class="mb-2 pt-2 pb-2">
-                
-                {% for field in form %} 
-                    <div class="mb-4"> <label class="block text-slate-700 text-lg font-bold mb-2 dark:text-slate-400" for="{{ field.id_for_label }}">{{ field.label }}</label> 
-                        {% render_field field class="bg-slate-100 dark:bg-slate-700 dark:text-slate-300 text-slate-800 rounded-lg p-3 drop-shadow-xl w-full" %} 
-                    </div> 
-                {% endfor %} 
-            
-            <div class="flex justify-end">
-                <button type="submit" class="w-1/6 p-3 bg-blue-500 text-white rounded-lg mt-4 hover:bg-yellow-300 hover:text-slate-800">Send</button>
-                <button type="reset" class="w-1/6 p-3 bg-red-500 text-white rounded-lg mt-4 ml-6 hover:bg-red-700">Cancel</button>
-            </div>
-        </form>
-    </div>
+            {% for field in form %} 
+                <div class="mb-4"> <label class="block text-slate-700 text-lg font-bold mb-2 dark:text-slate-400" for="{{ field.id_for_label }}">{{ field.label }}</label> 
+                    {% render_field field class="bg-slate-100 dark:bg-slate-700 dark:text-slate-300 text-slate-800 rounded-lg p-3 drop-shadow-xl w-full" %} 
+                </div> 
+            {% endfor %} 
+
+            {% if messages %}
+                {% for message in messages %}
+                    {% if 'info' in message.tags %}
+                        {% include 'components/alert.html' with is_info=True title="Success" body=message %}
+                    {% elif 'error' in message.tags %}
+                        {% include 'components/alert.html' with is_info=False title="Error" body=message %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        
+        <div class="flex justify-end">
+            <button type="submit" class="w-1/6 p-3 bg-blue-500 text-white rounded-lg mt-4 hover:bg-yellow-300 hover:text-slate-800">Send</button>
+            <button type="reset" class="w-1/6 p-3 bg-red-500 text-white rounded-lg mt-4 ml-6 hover:bg-red-700">Cancel</button>
+        </div>
+    </form>
+
 
     <h1 class="flex justify-center items-center mt-4 text-slate-800 dark:text-gray-50 text-5xl font-bold p-4 rounded-lg">Book Title List:</h1>
 
