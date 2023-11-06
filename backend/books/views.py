@@ -32,6 +32,17 @@ class BookTitleListView(FormView, ListView):
         messages.add_message(self.request, messages.ERROR, form.errors)
         return super().form_invalid(form)
     
+    def get_context_data(self, **kwargs):
+        # context = { # with just get_context_data(self):
+        #     'hi':'Hello World',
+        #     'form':self.form_class,
+        #     'qs':self.get_queryset(),
+        # }
+        context = super().get_context_data(**kwargs)
+        context['hi'] = "Hello World"
+        context['hi2'] = "Hello World 2"
+        return context
+    
 
 # -------------------------------------------------------------------------------------------------
 
