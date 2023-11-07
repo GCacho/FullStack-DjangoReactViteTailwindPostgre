@@ -1,0 +1,30 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en" class="{% if request.session.is_dark_mode %}dark{% endif %}">
+	<head>
+    <title>Django Tailwind {% block title %}{% endblock title %}</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<!-- font-awesome : https://cdnjs.com/libraries/font-awesome -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		{% tailwind_css %}
+	</head>
+
+	<body class="bg-gray-50 dark:bg-slate-800 dark:text-white">
+		{% include "layout/navbar.html" %}
+		<div class = "grid grid-cols-12">
+			<div class="col-span-1">
+				{% include "layout/sidebar.html" %}
+			</div>
+			<div class="col-span-11">
+				<div class = "pt-20 px-6">
+					<a href="{% url "change" %}" class="text-2xl fixed top-[150px] right-0 p-3.5 rounded-l-lg bg-slate-500 hover:bg-slate-600 dark:bg-yellow-300 dark:hover:bg-yellow-500 text-slate-300 dark:text-slate-800 drop-shadow-md transition-all">
+						<i class="fa-solid {% if request.session.is_dark_mode %}fa-sun{% else %}fa-moon{% endif %}"></i>
+					</a>
+					{% block content %}{% endblock content %}
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

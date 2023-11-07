@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+
+{% include "components/header.html" with title="Home" description="Welcome to my web" %}
+
+{% if qs %}
+    <ul>   
+    {% for obj in qs  %}
+        <li>{{ obj.first_name }} {{ obj.last_name }} ({{obj.username}})</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    No customers in the DB
+{% endif %}
+
+{% endblock content %}
