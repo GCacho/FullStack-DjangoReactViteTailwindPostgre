@@ -1,22 +1,14 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
+{% load static %}
 
 {% block title %}book title list{% endblock title %}
 
 {% block content %}
-
-    {% comment %} {% if form.non_field_errors %}
-        {% for error in form.non_field_errors %}
-            <div class="font-bold text-xl text-red-500">{{ error }}</div>
-        {% endfor %}
-    {% endif %} {% endcomment %}
-
    
     {% include "components/header.html" with title="Book Titles" description="List of all the book titles available" %}
 
-    {% for letter in letters %}
-        <a href="{% url 'books:book-first-letter' letter=letter|capfirst %}"> {{ letter }} </a>
-    {% endfor %}
+    <h1 class="flex justify-center items-center mt-4 text-slate-800 dark:text-gray-50 text-5xl font-bold p-4 rounded-lg">Add a New Title</h1>
 
     <form action="" method="POST">
         {% csrf_token %}
@@ -48,22 +40,39 @@
 
     <h1 class="flex justify-center items-center mt-4 text-slate-800 dark:text-gray-50 text-5xl font-bold p-4 rounded-lg">Book Title List:</h1>
 
+    <div class="flex justify-between items-center py-2 px-4">
+        <!-- Contenedor para la Barra de Búsqueda -->
+        <div class="flex items-center border rounded-lg w-1/2">
+            <span class="px-2">
+                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10a4 4 0 101.9 3.3L14.4 17H15v-1.6l-4.5-4.5a4 4 0 00-.5-5.9z"></path></svg>
+            </span>
+            <input type="text" id="searchInput" placeholder="Search titles..." class="px-3 py-1 w-full">
+        </div>
+    
+        <!-- Contenedor para las Letras -->
+        <div class="flex items-center space-x-1">
+            {% for letter in letters %}
+                <a href="#" data-letter="{{ letter }}" class="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                    {{ letter }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
     {% if qs %}
-    <div class="flex justify-center mt-4">
-        <ul class="list-none">
-            {% for elmnt in qs %}
-                <li class="mb-2">
-                    <span class="text-lg text-slate-800 dark:text-gray-50 mr-2">{{ forloop.counter }}.</span>
+        <div class="flex justify-center mt-4">
+            <ul class="grid grid-cols-4 gap-4 bg-transparent borderrounded-lg p-4">
+                {% for elmnt in qs %}
+                <li class="book-item border border-white rounded-lg p-2" data-title-letter="{{ elmnt.title.0|lower }}">
                     <a href="{{ elmnt.get_absolute_url }}" class="text-lg text-slate-800 dark:text-gray-50 hover:text-blue-500">
                         {{ elmnt.title|capfirst }}
                     </a>
-                </li> 
-            {% endfor %}
-        </ul>
-    </div>
-{% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    
+    <script src="{% static 'js/books_app.js' %}"></script>
 
-    {% comment "" %}el.get_absolute_url comes from books/models {% endcomment %}
-
-    {% endblock content %}
-
+{% endblock content %}

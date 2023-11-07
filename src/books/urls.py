@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import BookTitleListView, book_title_detail_view, book_first_letter_view
+from .views import BookTitleListView, book_title_detail_view
 
 app_name = 'books'
 
@@ -9,5 +9,4 @@ urlpatterns = [
     path('', BookTitleListView.as_view(), name='main'),
     path('<pk>/', book_title_detail_view, name='detail'), # <pk> - primary key, <str:text> - string, <slug> - slug
     
-    path('books/<str:letter>/', book_first_letter_view, name='book-first-letter'),
 ]
