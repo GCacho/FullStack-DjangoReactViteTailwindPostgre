@@ -1,7 +1,7 @@
 {% if is_info %}
-    <div class="relative flex-col mb-3 border bg-sky-200 border-sky-700 text-sky-700 px-4 py-3 rounded-lg" role="alert">
+    <div class="relative flex-col mb-3 mt-6 border bg-sky-200 border-sky-700 text-sky-700 px-4 py-3 rounded-lg lg:ml-6 md:ml-6" role="alert">
 {% else %}
-    <div class="relative flex-col mb-3 border bg-pink-200 border-red-700 text-red-700 px-4 py-3 rounded-lg" role="alert">
+    <div class="relative flex-col mb-3 mt-6 border bg-pink-200 border-red-700 text-red-700 px-4 py-3 rounded-lg lg:ml-6 md:ml-6" role="alert">
 {% endif %}
         <button class="absolute top-0 right-0 mt-2 mr-2 text-2xl font-semibold leading-none" onclick="this.parentElement.style.display='none';">&times;</button>
         <div class="text-2x1">{{ title }}</div>

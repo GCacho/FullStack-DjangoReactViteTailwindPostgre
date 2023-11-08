@@ -2,7 +2,6 @@ from django.shortcuts import render
 from .models import BookTitle
 from django.views.generic import ListView, FormView
 from .forms import BookTitleForm
-from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 import string
 # Create your views here.
