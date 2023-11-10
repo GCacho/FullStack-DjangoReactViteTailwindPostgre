@@ -18,8 +18,11 @@ class BookTitleListView(FormView, ListView):
         return self.request.path
     
     def get_queryset(self):
-        parameter = self.kwargs.get('letter') if self.kwargs.get('letter') else'a'  # Asegurándose de que esté en minúsculas
-        return BookTitle.objects.filter(title__istartswith=parameter)
+        parameter = self.kwargs.get('letter')  # Asegurándose de que esté en minúsculas
+        if parameter:
+            return BookTitle.objects.filter(title__istartswith=parameter)
+        else:
+            return BookTitle.objects.all()
     
     def form_valid(self, form): # To save the form data into the DB
         self.i_instance = form.save()
@@ -35,7 +38,7 @@ class BookTitleListView(FormView, ListView):
         context = super().get_context_data(**kwargs)
         letters = list(string.ascii_lowercase)
         context['letters'] = letters
-        context['selected_letter'] = self.kwargs.get('letter') if self.kwargs.get('letter') else 'a'
+        context['selected_letter'] = self.kwargs.get('letter')
         return context
     
 

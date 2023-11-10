@@ -60,6 +60,7 @@ module.exports = {
                 '24': 'repeat(24, minmax(0, 1fr))',
                 '25': 'repeat(25, minmax(0, 1fr))',
                 '26': 'repeat(26, minmax(0, 1fr))',
+                '27': 'repeat(27, minmax(0, 1fr))',
                 // Añade más según lo necesites
             },
             colors: {
