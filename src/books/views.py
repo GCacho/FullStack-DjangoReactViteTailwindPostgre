@@ -1,3 +1,4 @@
+from typing import Any
 from django.shortcuts import render
 from .models import BookTitle
 from django.views.generic import ListView, FormView
@@ -8,8 +9,6 @@ import string
 
 class BookTitleListView(FormView, ListView):
     model = BookTitle
-    # queryset = BookTitle.objects.all()[:3] # Just send the first 3 objects
-    # queryset = BookTitle.objects.all().order_by('-created') # Reverse order
     template_name = 'books/main.html'
     context_object_name = 'qs'
     form_class = BookTitleForm
@@ -17,6 +16,10 @@ class BookTitleListView(FormView, ListView):
 
     def get_success_url(self): # To send the form to the DB with the correct URL
         return self.request.path
+    
+    def get_queryset(self):
+        parameter = self.kwargs.get('letter') if self.kwargs.get('letter') else'a'  # Asegurándose de que esté en minúsculas
+        return BookTitle.objects.filter(title__istartswith=parameter)
     
     def form_valid(self, form): # To save the form data into the DB
         self.i_instance = form.save()
@@ -30,8 +33,9 @@ class BookTitleListView(FormView, ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        letters = list(string.ascii_uppercase)
+        letters = list(string.ascii_lowercase)
         context['letters'] = letters
+        context['selected_letter'] = self.kwargs.get('letter') if self.kwargs.get('letter') else 'a'
         return context
     
 
