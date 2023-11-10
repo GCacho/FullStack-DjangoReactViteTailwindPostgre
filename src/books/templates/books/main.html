@@ -80,7 +80,7 @@
                     <h3 class="text-2xl font-bold rounded-lg mb-3 text-center text-white">-Book Titles-</h3>
                     <div class="flex flex-col items-center justify-center lg:flex-row mb-6 w-full">
                         <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 bg-transparent borderrounded-lg p-4">
-                            {% for elmnt in qs|slice:":36" %}
+                            {% for elmnt in qs %}
                                 <li class="book-item border bg-slate-800/20 hover:bg-purple-600 dark:hover:bg-green-600 border-white rounded-lg p-2 flex justify-center items-center">
                                     <a href="{{ elmnt.get_absolute_url }}" class="text-lg text-white text-center">
                                         {{ elmnt.title|capfirst }}
@@ -97,7 +97,7 @@
 
     </div>
     
-    <script src="{% static 'books/search_books_app.js' %}"></script>
-    <script src="{% static 'books/show_form_books_app.js' %}"></script>
+    <script src="{% static 'js/search_books_app.js' %}"></script>
+    <script src="{% static 'js/show_form_books_app.js' %}"></script>
 
 {% endblock content %}

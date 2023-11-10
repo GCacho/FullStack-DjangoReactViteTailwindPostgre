@@ -20,9 +20,10 @@ class BookTitleListView(FormView, ListView):
     def get_queryset(self):
         parameter = self.kwargs.get('letter')  # Asegurándose de que esté en minúsculas
         if parameter:
-            return BookTitle.objects.filter(title__istartswith=parameter)
+            books = BookTitle.objects.filter(title__istartswith=parameter)
         else:
-            return BookTitle.objects.all()
+            books = BookTitle.objects.all()
+        return books.order_by('title')
     
     def form_valid(self, form): # To save the form data into the DB
         self.i_instance = form.save()
