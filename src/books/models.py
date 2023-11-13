@@ -28,7 +28,8 @@ class BookTitle(models.Model):
     
     # Create the absolute url for correct navigation
     def get_absolute_url(self):
-        return reverse("books:detail", kwargs={"pk": self.pk})
+        letter = self.title[:1].lower()
+        return reverse("books:detail", kwargs={"letter":letter, "pk": self.pk})
     
 
     def __str__(self):

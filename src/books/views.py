@@ -50,7 +50,7 @@ class BookTitleListView(FormView, ListView):
 #     return render(request,'books/main.html', {'qs':qs})
 
 
-def book_title_detail_view(request, pk):
+def book_title_detail_view(request, letter, pk):
     obj = BookTitle.objects.get(pk=pk)
     return render(request, 'books/detail.html', {'obj':obj})
 
