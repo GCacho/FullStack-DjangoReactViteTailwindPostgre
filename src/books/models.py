@@ -29,12 +29,13 @@ class BookTitle(models.Model):
     # Create the absolute url for correct navigation
     def get_absolute_url(self):
         letter = self.title[:1].lower()
-        return reverse("books:detail", kwargs={"letter":letter, "pk": self.pk})
+        return reverse("books:detail", kwargs={"letter":letter, "slug": self.slug})
     
 
     def __str__(self):
         return f"Book Position: {self.title}"
     
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)

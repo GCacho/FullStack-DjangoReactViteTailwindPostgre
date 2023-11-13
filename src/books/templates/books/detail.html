@@ -4,8 +4,14 @@
 
 {% block content %}
 
-<h1>Title: {{obj.title|capfirst}}</h1>
+{% comment %} <h1>Title: {{obj.title|capfirst}}</h1>
 <br>
-<a href="{% url "books:main" %}" class="btn btn-danger">Go Back</a>
+<a href="{% url "books:main" %}" class="btn btn-danger">Go Back</a> {% endcomment %}
+
+    {% for obj in object_list %}
+        <div>{{obj.title.title}} - {{obj.isbn}}</div>
+    {% endfor %}
+
+    <a href="{% url "books:main" %}" class="btn btn-danger">Go Back</a> 
 
 {% endblock content %}
