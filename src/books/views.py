@@ -59,6 +59,7 @@ class BookTitleListView(FormView, ListView):
 
 class BookListView(ListView):
     template_name = 'books/detail.html'
+    paginate_by = 2
 
 
     def get_queryset(self):
