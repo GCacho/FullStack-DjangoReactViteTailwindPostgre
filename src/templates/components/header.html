@@ -4,7 +4,13 @@
         <div><h2 class="text-md mt-1">{{ description }}</h2></div>
     </div>
     <div>
-        {% if if_form_available %}
+        {% if is_detail_page %}
+            <a href="{% url 'books:main' %}" class="bg-transparent border-2 border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-green-400 dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-pink-600 dark:hover:border-white p-2 rounded-xl text-xl">
+                <i class="fa-solid fa-left-long"></i>
+            </a>
+        {% endif %}
+        <!-- Botón para agregar Formularios (se muestra en páginas que no son detail.html) -->
+        {% if if_form_available and not is_detail_page %}
             <div>
                 <button class="bg-transparent border-2 border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-green-400 dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-pink-600 dark:hover:border-white p-2 rounded-xl text-xl" id="openModalButton">{{ icon }}</button>
             </div>

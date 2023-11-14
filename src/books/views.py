@@ -46,17 +46,6 @@ class BookTitleListView(FormView, ListView):
 
 # -------------------------------------------------------------------------------------------------
 
-# def book_title_list_view(request): # Same as -> class BookTitleListView(ListView): on the top of this file.
-#     qs = BookTitle.objects.all()
-#     return render(request,'books/main.html', {'qs':qs})
-
-
-# def book_title_detail_view(request, **kwargs):
-#     slug = kwargs.get('slug')
-#     obj = BookTitle.objects.get(slug=slug)
-#     return render(request, 'books/detail.html', {'obj':obj})
-
-
 class BookListView(ListView):
     template_name = 'books/detail.html'
     paginate_by = 2
@@ -65,6 +54,15 @@ class BookListView(ListView):
     def get_queryset(self):
         title_slug = self.kwargs.get('slug')
         return Book.objects.filter(title__slug = title_slug)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        title_slug = self.kwargs.get('slug')
+        if title_slug:
+            book_title = Book.objects.filter(title__slug=title_slug).first()
+            if book_title:
+                context['book_title'] = book_title.title
+        return context
 
 
 

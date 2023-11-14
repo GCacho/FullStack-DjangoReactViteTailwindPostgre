@@ -4,36 +4,34 @@
 
 {% block content %}
 
-    {% for obj in object_list %}
-        <div class="mb-4">{{obj.title.title}} - {{obj.isbn}}</div>
-    {% endfor %}
-    <div class="mt-8">
-        <a href="{% url 'books:main' %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out">
-            Go Back
+{% include "components/header.html" with title=book_title description="Book Title Details" if_form_available=True icon="<i class='fa-solid fa-plus'></i>" is_detail_page=True %}
+
+{% for obj in object_list %}
+    <div class="mb-4">{{obj.title.title}} - {{obj.isbn}}</div>
+{% endfor %}
+
+<div class="flex justify-center items-center space-x-4 my-4">
+    {% if page_obj.has_previous %}
+        <a href="?page=1" class="px-3 py-1 text-blue-500 hover:text-blue-700">
+            <i class="fa fa-angle-double-left"></i>
         </a>
-    </div>
-    <div class="flex justify-center items-center space-x-4 my-4">
-        {% if page_obj.has_previous %}
-            <a href="?page=1" class="px-3 py-1 text-blue-500 hover:text-blue-700">
-                <i class="fa fa-angle-double-left"></i>
-            </a>
-            <a href="?page={{ page_obj.previous_page_number }}" class="px-3 py-1 text-blue-500 hover:text-blue-700">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        {% endif %}
-    
-        <span class="px-3 py-1">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
-    
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}" class="px-3 py-1 text-blue-500 hover:text-blue-700">
-                <i class="fa fa-angle-right"></i>
-            </a>
-            <a href="?page={{ page_obj.paginator.num_pages }}" class="px-3 py-1 text-blue-500 hover:text-blue-700">
-                <i class="fa fa-angle-double-right"></i>
-            </a>
-        {% endif %}
-    </div>
+        <a href="?page={{ page_obj.previous_page_number }}" class="px-3 py-1 text-blue-500 hover:text-blue-700">
+            <i class="fa fa-angle-left"></i>
+        </a>
+    {% endif %}
+
+    <span class="px-3 py-1">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </span>
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="px-3 py-1 text-blue-500 hover:text-blue-700">
+            <i class="fa fa-angle-right"></i>
+        </a>
+        <a href="?page={{ page_obj.paginator.num_pages }}" class="px-3 py-1 text-blue-500 hover:text-blue-700">
+            <i class="fa fa-angle-double-right"></i>
+        </a>
+    {% endif %}
+</div>
 
 {% endblock content %}

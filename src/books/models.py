@@ -33,7 +33,7 @@ class BookTitle(models.Model):
     
 
     def __str__(self):
-        return f"Book Position: {self.title}"
+        return self.title
     
 
     def save(self, *args, **kwargs):
