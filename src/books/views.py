@@ -14,6 +14,7 @@ class BookTitleListView(FormView, ListView):
     context_object_name = 'qs'
     form_class = BookTitleForm
     i_instance = None
+    paginate_by = 36
 
     def get_success_url(self): # To send the form to the DB with the correct URL
         return self.request.path
