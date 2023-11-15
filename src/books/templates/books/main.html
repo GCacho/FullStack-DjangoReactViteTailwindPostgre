@@ -96,7 +96,7 @@
             <!-- Paginación -->
 
             <div class="flex justify-center items-center space-x-4 my-4">
-                <div class="bg-blue-500 p-2 rounded-lg ">
+                <div class="bg-slate-800/20 p-2 rounded-lg border border-slate-100">
                     {% if page_obj.has_previous %}
                         <a href="?page=1" class="px-3 py-1 hover:text-blue-700">
                             <i class="fa fa-angle-double-left"></i>
@@ -107,7 +107,7 @@
                     {% endif %}
                 
                     <span class="px-3 py-1">
-                        Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
                     </span>
                 
                     {% if page_obj.has_next %}
