@@ -5,6 +5,7 @@ from .models import BookTitle, Book
 from django.views.generic import ListView, FormView
 from .forms import BookTitleForm
 from django.contrib import messages
+from django.http import JsonResponse
 import string
 # Create your views here.
 
@@ -66,7 +67,11 @@ class BookListView(ListView):
         return context
 
 
-
 def book_first_letter_view(request, letter):
     books = BookTitle.objects.filter(title__istartswith=letter)
     return render(request, 'books/first_letter.html', {'books': books, 'letter': letter})
+
+def search_books(request):
+    query = request.GET.get('q', '')
+    books = BookTitle.objects.filter(title__icontains=query).values('title', 'slug')[:10]  # Limitando los resultados a 10
+    return JsonResponse(list(books), safe=False)

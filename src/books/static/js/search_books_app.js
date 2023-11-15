@@ -17,13 +17,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Función para filtrar libros basados en el texto de búsqueda
     function searchBooks(query) {
-        bookItems.forEach(function (bookItem) {
-            const title = bookItem.textContent.toLowerCase();
-            if (title.includes(query.toLowerCase())) {
-                bookItem.style.display = 'block';
-            } else {
-                bookItem.style.display = 'none';
-            }
+        fetch(`/books/search/?q=${encodeURIComponent(query)}`) 
+            .then(response => response.json())
+            .then(data => {
+                displaySearchResults(data);
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    // Mostrar los Resultados de la Búsqueda:
+    function displaySearchResults(books) {
+        const resultsContainer = document.getElementById('search-results'); // Asegúrate de tener este contenedor en tu HTML
+        resultsContainer.innerHTML = ''; // Limpiar resultados anteriores
+    
+        books.forEach(book => {
+            const bookElement = document.createElement('div');
+            bookElement.className = 'search-result-item';
+            bookElement.innerHTML = `<a href="/books/${book.slug}/">${book.title}</a>`;
+            resultsContainer.appendChild(bookElement);
         });
     }
 
